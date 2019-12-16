@@ -1,9 +1,10 @@
 package model;
 
-public  interface FincoObservable {
+public interface FincoObservable<T> {
 
-    public void addObserver(FincoObserver ob);
+	public void addObserver(FincoObserver<T> ob);
 
-    public void removeObserver(FincoObserver ob);
-    public void notifyObservers();
+	public void removeObserver(FincoObserver<T> ob);
+
+	public void notifyObservers();
 }

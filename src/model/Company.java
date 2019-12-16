@@ -3,8 +3,9 @@ package model;
 public class Company extends AbstractCustomer implements ICompany {
 
     private int numberOfEmployees;
-    public Company(String name, String email, Address address) {
+    public Company(String name, String email, Address address, int numberOfEmployees) {
         super(name, email, address);
+        this.numberOfEmployees = numberOfEmployees;
     }
 
     @Override
