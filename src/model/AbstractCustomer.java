@@ -8,12 +8,13 @@ public abstract class AbstractCustomer implements ICustomer {
 	private String name;
 	private String email;
 	private Address address;
-	private List<IAccount> accounts = new ArrayList<>();
+	private List<IAccount> accounts ;
 	
 	public AbstractCustomer(String name, String email, Address address) {
 		this.name = name;
 		this.email = email;
 		this.address = address;
+		accounts= new ArrayList<>();
 	}
 	
 	@Override
@@ -62,8 +63,8 @@ public abstract class AbstractCustomer implements ICustomer {
 	}
 	
 	@Override
-	public void sendEmail() {
-		System.out.println("Email sent to: " + this.name + " - " + this.email);
+	public void sendEmail(String msg) {
+		System.out.println( msg + " "+ "sent to: " + this.name + " - " + this.email);
 	}
 	
 	//Is Customer name and email is equal to existing customer?

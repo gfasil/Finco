@@ -1,6 +1,8 @@
 package model;
 
 public class Company extends AbstractCustomer implements ICompany {
+
+    private int numberOfEmployees;
     public Company(String name, String email, Address address) {
         super(name, email, address);
     }
@@ -12,21 +14,23 @@ public class Company extends AbstractCustomer implements ICompany {
 
     @Override
     public int employeeCount() {
-        return 0;
+        return numberOfEmployees;
     }
 
     @Override
     public int getNoOfEmployees() {
-        return 0;
+        return numberOfEmployees;
     }
 
     @Override
     public void setNoOfEmployees(int noOfEmployees) {
-
+        this.numberOfEmployees=noOfEmployees;
     }
 
+
     @Override
-    public Address setAddress() {
-        return null;
+    public void update(IAccount acc) {
+        // to be done
+        this.sendEmail("Account updated, new balance:" + acc.getBalance());
     }
 }

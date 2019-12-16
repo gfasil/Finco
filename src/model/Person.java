@@ -1,8 +1,6 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 public class Person extends AbstractCustomer implements  IPerson{
     private LocalDate birthdate;
@@ -17,9 +15,16 @@ public class Person extends AbstractCustomer implements  IPerson{
         return this.birthdate;
     }
 
+
+
     @Override
     public void setBirthDate(LocalDate birthDate) {
         this.birthdate = birthDate;
     }
 
+    @Override
+    public void update(IAccount acc) {
+        // to be done
+        this.sendEmail("Account updated, new balance:" + acc.getBalance());
+    }
 }

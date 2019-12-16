@@ -5,22 +5,23 @@ import java.util.List;
 
 public class AbstractAccount implements IAccount {
 
-    private List<FincoObserver> observers;
+    private List<FincoObserver<IAccount>> observers;
     private ICustomer owner;
     private List<IOperation> transactions;
     private double currentBalance;
     private double interest;
     private String accNumber;
 
-        public AbstractAccount(ICustomer owner,  double interest,String accNumber){
+    public AbstractAccount(ICustomer owner, double interest, String accNumber) {
 
-            this.owner=owner;
-            this.accNumber=accNumber;
-            this.interest=interest;
-            this.currentBalance=0.0;
-             observers=new ArrayList<>();
-            transactions=new ArrayList<>();
-        }
+        this.owner = owner;
+        this.accNumber = accNumber;
+        this.interest = interest;
+        this.currentBalance = 0.0;
+        observers = new ArrayList<>();
+        transactions = new ArrayList<>();
+    }
+
     @Override
     public void addObserver(FincoObserver ob) {
         observers.add(ob);
@@ -40,11 +41,9 @@ public class AbstractAccount implements IAccount {
 
     @Override
     public void notifyObservers() {
-        for (FincoObserver temp : observers) {
-
-            temp.update(this, ""); // review
+        for (FincoObserver<IAccount> o : observers) {
+            o.update(this); // review
         }
-
     }
 
     @Override
@@ -64,7 +63,7 @@ public class AbstractAccount implements IAccount {
 
     @Override
     public void addInterest() {
-        setBalance( getBalance()+ (getBalance() * this.getInterest()));
+        setBalance(getBalance() + (getBalance() * this.getInterest()));
 
     }
 
@@ -72,8 +71,8 @@ public class AbstractAccount implements IAccount {
     @Override
     public boolean applyOperation(IOperation transaction) {
         this.transactions.add(transaction);
-        double newBalance=getBalance() + transaction.getAmount();
-        if(newBalance<0) return false;
+        double newBalance = getBalance() + transaction.getAmount();
+        if (newBalance < 0) return false;
         setBalance(newBalance);
         return true;
 
