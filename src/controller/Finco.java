@@ -9,9 +9,8 @@ public class Finco {
 
 	private static List<ICustomer> customers = new ArrayList<ICustomer>();
 	
-	private static IFincoAbstractFactory personAccountFactory = new FincoPersonFactory();
+	private static IFincoAbstractFactory fincoFactory = new FincoFactory();
 
-	private static IFincoAbstractFactory companyAccountFactory = new FincoCompanyFactory();
 
 	public static void addCompanyAccount() {
 		
