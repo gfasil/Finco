@@ -10,7 +10,7 @@ public interface IAccount extends FincoObservable<IAccount> {
 
     public double getInterest();
 
-    public void setInterest(double interest);
+
 
     public void addInterest();
 

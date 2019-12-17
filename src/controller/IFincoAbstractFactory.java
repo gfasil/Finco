@@ -1,10 +1,10 @@
 package controller;
 
-import java.time.LocalDate;
-
 import model.IAccount;
 import model.ICustomer;
 import model.IOperation;
+
+import java.time.LocalDate;
 
 public interface IFincoAbstractFactory {
 
@@ -16,5 +16,5 @@ public interface IFincoAbstractFactory {
 
 	public IAccount createAccount(ICustomer owner);
 
-	public IOperation createOperation(String name, double amount, LocalDate timeStamp);
+	public IOperation createOperation(String name, double amount);
 }

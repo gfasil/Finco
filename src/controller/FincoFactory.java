@@ -1,15 +1,8 @@
 package controller;
 
-import java.time.LocalDate;
+import model.*;
 
-import model.Account;
-import model.Address;
-import model.Company;
-import model.IAccount;
-import model.ICustomer;
-import model.IOperation;
-import model.Operation;
-import model.Person;
+import java.time.LocalDate;
 
 public class FincoFactory implements IFincoAbstractFactory {
 
@@ -19,8 +12,8 @@ public class FincoFactory implements IFincoAbstractFactory {
 	}
 
 	@Override
-	public IOperation createOperation(String name, double amount, LocalDate timeStamp) {
-		return new Operation(name, amount, timeStamp);
+	public IOperation createOperation(String name, double amount) {
+		return new Operation(name, amount);
 	}
 
 	@Override

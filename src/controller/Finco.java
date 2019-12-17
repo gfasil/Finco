@@ -1,12 +1,12 @@
 package controller;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 import model.Account;
 import model.ICustomer;
 import model.IOperation;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Finco {
 
@@ -33,8 +33,8 @@ public class Finco {
 
 	}
 
-	public static void addAccountOperation(Account acc, String name, double amount, LocalDate timeStamp) {
-		IOperation newOpp = fincoFactory.createOperation(name, amount, timeStamp);
+	public static void addAccountOperation(Account acc, String name, double amount) {
+		IOperation newOpp = fincoFactory.createOperation(name, amount);
 		acc.applyOperation(newOpp);
 	}
 

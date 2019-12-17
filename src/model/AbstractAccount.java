@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class AbstractAccount implements IAccount {
+public abstract class AbstractAccount implements IAccount {
 
     private List<FincoObserver<IAccount>> observers;
     private ICustomer owner;
     private List<IOperation> transactions;
     private double currentBalance;
-    private double interest;
+   // private double interest;
     private String accNumber;
 
     public AbstractAccount(ICustomer owner) {
         this.owner = owner;
         this.accNumber = UUID.randomUUID().toString();
-        this.interest = 0.1;
+     //   this.interest = 0.1;
         this.currentBalance = 0.0;
         observers = new ArrayList<>();
         observers.add(owner);
@@ -47,15 +47,11 @@ public class AbstractAccount implements IAccount {
         }
     }
 
-    @Override
-    public double getInterest() {
-        return this.interest;
-    }
 
-    @Override
-    public void setInterest(double interest) {
-        this.interest = interest;
-    }
+//    @Override
+//    public void setInterest(double interest) {
+//        this.interest = interest;
+//    }
 
     @Override
     public String toString() {
