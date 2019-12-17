@@ -27,4 +27,9 @@ public class Person extends AbstractCustomer implements  IPerson{
         // to be done
         this.sendEmail("Account updated, new balance:" + acc.getBalance());
     }
+
+	@Override
+	public String getType() {
+		return "Person";
+	}
 }

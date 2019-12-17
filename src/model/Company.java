@@ -34,4 +34,9 @@ public class Company extends AbstractCustomer implements ICompany {
         // to be done
         this.sendEmail("Account updated, new balance:" + acc.getBalance());
     }
+
+	@Override
+	public String getType() {
+		return "Company";
+	}
 }

@@ -1,9 +1,12 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public interface IOperation {
 	public String getName();
-	public String getTimestamp();
+
+	public LocalDateTime getTimestamp();
+
 	public double getAmount();
 }

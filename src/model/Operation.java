@@ -18,13 +18,13 @@ public class Operation implements IOperation {
     }
 
     @Override
-    public String getTimestamp() {
-        return null;
+    public LocalDateTime getTimestamp() {
+        return timeStamp;
     }
 
     @Override
     public double getAmount() {
-        return 0;
+        return amount;
     }
 
 }

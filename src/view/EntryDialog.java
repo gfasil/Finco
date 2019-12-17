@@ -33,7 +33,7 @@ public class EntryDialog extends javax.swing.JDialog {
 		this.function = function;
 		JLabels = new java.util.ArrayList<javax.swing.JLabel>();
 		JTextFields = new java.util.ArrayList<javax.swing.JTextField>();
-		setSize(DIALOUGE_WIDTH, ENTRY_HEIGHT * (labels.size() + 4));
+		setSize(DIALOUGE_WIDTH, ENTRY_HEIGHT * (labels.size() + 6));
 		int entryYOffset = INITIAL_ENTRY_Y_OFFSET;
 		for (String label : labels) {
 			javax.swing.JLabel jLabel = new javax.swing.JLabel();
