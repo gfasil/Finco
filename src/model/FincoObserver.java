@@ -1,9 +1,9 @@
 package model;
 
 @FunctionalInterface
-public interface FincoObserver {
+public interface FincoObserver<T> {
 
-    <T> void update(FincoObservable o, T arg);
+     void update(T o); //
 
 
 

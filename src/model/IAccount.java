@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public interface IAccount extends FincoObservable {
+public interface IAccount extends FincoObservable<IAccount> {
 
     public void setOwner(ICustomer customer);
 
@@ -10,7 +10,7 @@ public interface IAccount extends FincoObservable {
 
     public double getInterest();
 
-    public void setInterest(double interest);
+
 
     public void addInterest();
 
