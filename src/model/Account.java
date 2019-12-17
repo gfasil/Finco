@@ -11,6 +11,8 @@ public class Account extends AbstractAccount {
         return 0.1;
     }
 
-
-
+	@Override
+	public String getType() {
+		return "Account";
+	}
 }

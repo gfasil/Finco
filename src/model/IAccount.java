@@ -25,4 +25,8 @@ public interface IAccount extends FincoObservable<IAccount> {
 	public String getAccountNumber();
 
     public List<IOperation> getTransactions();
+
+	public ICustomer getOwner();
+
+	public String getType();
 }

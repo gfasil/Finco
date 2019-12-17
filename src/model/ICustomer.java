@@ -15,4 +15,5 @@ public interface ICustomer extends FincoObserver<IAccount> {
 	public Address getAddress();
 
 	public void sendEmail(String msg);
+	public String getType();
 }
