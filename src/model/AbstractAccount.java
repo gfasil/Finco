@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class AbstractAccount implements IAccount {
 
@@ -12,23 +13,23 @@ public class AbstractAccount implements IAccount {
     private double interest;
     private String accNumber;
 
-    public AbstractAccount(ICustomer owner, double interest, String accNumber) {
-
+    public AbstractAccount(ICustomer owner) {
         this.owner = owner;
-        this.accNumber = accNumber;
-        this.interest = interest;
+        this.accNumber = UUID.randomUUID().toString();
+        this.interest = 0.1;
         this.currentBalance = 0.0;
         observers = new ArrayList<>();
+        observers.add(owner);
         transactions = new ArrayList<>();
     }
 
     @Override
-    public void addObserver(FincoObserver ob) {
+    public void addObserver(FincoObserver<IAccount> ob) {
         observers.add(ob);
     }
 
     @Override
-    public void removeObserver(FincoObserver ob) {
+    public void removeObserver(FincoObserver<IAccount> ob) {
         observers.remove(ob);
 
     }
