@@ -2,25 +2,25 @@ package controller;
 
 import java.time.LocalDate;
 
+import model.Account;
 import model.Address;
 import model.Company;
 import model.IAccount;
 import model.ICustomer;
 import model.IOperation;
+import model.Operation;
 import model.Person;
 
 public class FincoFactory implements IFincoAbstractFactory {
 
 	@Override
-	public IAccount createAccount() {
-		// TODO Auto-generated method stub
-		return null;
+	public IAccount createAccount(ICustomer owner) {
+		return new Account(owner);
 	}
 
 	@Override
-	public IOperation createOperation() {
-		// TODO Auto-generated method stub
-		return null;
+	public IOperation createOperation(String name, double amount, LocalDate timeStamp) {
+		return new Operation(name, amount, timeStamp);
 	}
 
 	@Override
