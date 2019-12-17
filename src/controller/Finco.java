@@ -12,35 +12,36 @@ import java.util.function.BiPredicate;
 
 public class Finco {
 
-    private static List<ICustomer> customers = new ArrayList<ICustomer>();
+	private List<ICustomer> customers = new ArrayList<ICustomer>();
 
-    private static IFincoAbstractFactory fincoFactory = new FincoFactory();
+	private IFincoAbstractFactory fincoFactory = new FincoFactory();
 
-    private static ICustomer findCustomer(ICustomer customer) {
-        return customers.stream().filter(c -> c.equals(customer)).findFirst().orElse(customer);
+	private ICustomer findOrAddCustomer(ICustomer customer) {
+		return customers.stream().filter(c -> c.equals(customer)).findFirst().orElseGet(() -> {
+			customers.add(customer);
+			return customer;
+		});
+	}
+
+	public void addCompanyAccount(String name, String email, String street, String city, String state, String zipcode,
+			int numOfEmployees) {
+		ICustomer customer = fincoFactory.createCompany(name, email, street, city, state, zipcode, numOfEmployees);
+		customer = findOrAddCustomer(customer);
+		customer.addAccount(fincoFactory.createAccount(customer));
+	}
+
+	public void addPersonAccount(String name, String email, String street, String city, String state, String zipcode,
+			LocalDate birthDate) {
+		ICustomer customer = fincoFactory.createPerson(name, email, street, city, state, zipcode, birthDate);
+		customer = findOrAddCustomer(customer);
+		customer.addAccount(fincoFactory.createAccount(customer));
+
     }
 
-    public static void addCompanyAccount(String name, String email, String street, String city, String state,
-                                         String zipcode, int numOfEmployees) {
-        ICustomer customer = fincoFactory.createCompany(name, email, street, city, state, zipcode, numOfEmployees);
-        customer = findCustomer(customer);
-        customer.addAccount(fincoFactory.createAccount(customer));
-        customers.add(customer);
-    }
-
-    public static void addPersonAccount(String name, String email, String street, String city, String state,
-                                        String zipcode, LocalDate birthDate) {
-        ICustomer customer = fincoFactory.createPerson(name, email, street, city, state, zipcode, birthDate);
-        customer = findCustomer(customer);
-        customer.addAccount(fincoFactory.createAccount(customer));
-        customers.add(customer);
-
-    }
-
-    public static void addAccountOperation(Account acc, String name, double amount) {
-        IOperation newOpp = fincoFactory.createOperation(name, amount);
-        acc.applyOperation(newOpp);
-    }
+	public void addAccountOperation(Account acc, String name, double amount) {
+		IOperation newOpp = fincoFactory.createOperation(name, amount);
+		acc.applyOperation(newOpp);
+	}
 
     protected static BiPredicate<ICustomer, String> hasAccount = (customer, accountNumber) -> customer.getAccountList().stream()
             .anyMatch(account -> account.getAccountNumber().equals(accountNumber));
