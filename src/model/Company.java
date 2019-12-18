@@ -39,4 +39,9 @@ public class Company extends AbstractCustomer implements ICompany {
 	public String getType() {
 		return "Company";
 	}
+
+    @Override
+    public boolean validateOperation(IAccount account, IOperation operation) {
+        return true;
+    }
 }

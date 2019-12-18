@@ -19,16 +19,20 @@ public class FincoFactory implements IFincoAbstractFactory {
 	@Override
 	public ICustomer createCompany(String name, String email, String street, String city, String state, String zipcode,
 			int numberOfEmployees) {
-		Address address = new Address(street, city, state, zipcode);
-		ICustomer customer = new Company(name, email, address, numberOfEmployees);
+		ICustomer customer = new Company(name, email, createAddress(street, city, state, zipcode), numberOfEmployees);
 		return customer;
+	}
+
+	public Address createAddress(String street, String city, String state, String zipcode){
+
+		return new Address(street, city, state, zipcode);
 	}
 
 	@Override
 	public ICustomer createPerson(String name, String email, String street, String city, String state, String zipcode,
 			LocalDate birthDate) {
-		Address address = new Address(street, city, state, zipcode);
-		ICustomer customer = new Person(name, email, address, birthDate);
+
+		ICustomer customer = new Person(name, email, createAddress(street, city, state, zipcode), birthDate, 500);
 		return customer;
 	}
 }

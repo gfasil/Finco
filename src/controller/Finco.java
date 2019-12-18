@@ -1,32 +1,31 @@
 package controller;
 
-import model.Account;
 import model.IAccount;
 import model.ICustomer;
 import model.IOperation;
+import view.AbstractWindow;
 import view.MainWindow;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiPredicate;
 
-import javax.swing.UIManager;
-
 public class Finco {
 
-	private List<ICustomer> customers;
+	protected List<ICustomer> customers;
 
-	private IFincoAbstractFactory fincoFactory;
+	protected IFincoAbstractFactory fincoFactory;
 
-	private MainWindow view;
+	protected AbstractWindow view;
 
 	public Finco(IFincoAbstractFactory fincoFactory) {
 		this.fincoFactory = fincoFactory;
 		this.customers = new ArrayList<ICustomer>();
 	}
 
-	private ICustomer findOrAddCustomer(ICustomer customer) {
+	protected ICustomer findOrAddCustomer(ICustomer customer) {
 		return customers.stream().filter(c -> c.equals(customer)).findFirst().orElseGet(() -> {
 			customers.add(customer);
 			return customer;
@@ -34,7 +33,7 @@ public class Finco {
 	}
 
 	public IAccount addCompanyAccount(String name, String email, String street, String city, String state,
-			String zipcode, int numOfEmployees) {
+			String zipcode, int numOfEmployees, String type) {
 		ICustomer customer = fincoFactory.createCompany(name, email, street, city, state, zipcode, numOfEmployees);
 		customer = findOrAddCustomer(customer);
 		IAccount acc = fincoFactory.createAccount(customer);
@@ -44,7 +43,7 @@ public class Finco {
 	}
 
 	public IAccount addPersonAccount(String name, String email, String street, String city, String state,
-			String zipcode, LocalDate birthDate) {
+			String zipcode, LocalDate birthDate, String type) {
 		ICustomer customer = fincoFactory.createPerson(name, email, street, city, state, zipcode, birthDate);
 		customer = findOrAddCustomer(customer);
 		IAccount acc = fincoFactory.createAccount(customer);
@@ -83,7 +82,18 @@ public class Finco {
 		customers.stream().map((ICustomer x) -> x.getAccountList())
 				.forEach(a -> a.stream().forEach(b -> b.addInterest()));
 	}
+	public  String generateReport() {
+		String report = "";
+		for (ICustomer c : customers) {
+			report += "\nName = " + c.getName();
+			report += "\nAddress = " + c.getAddress();
+			report += "\nAccount = " + c.getAccountList();
+			report += "\nTotal Balance = " + c.getAccountList().stream().mapToDouble(x -> x.getBalance()).sum();
+			System.out.println(c.getName());
 
+		}
+		return report;
+	}
 	public void run() {
 		try {
 			// Add the following code if you want the Look and Feel
@@ -96,6 +106,7 @@ public class Finco {
 
 			// make an instance of application's frame visible.
 			view = new MainWindow(this);
+			view.initializeWindow();
 			view.setVisible(true);
 		} catch (Throwable t) {
 			t.printStackTrace();

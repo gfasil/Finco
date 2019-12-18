@@ -16,4 +16,6 @@ public interface ICustomer extends FincoObserver<IAccount> {
 
 	public void sendEmail(String msg);
 	public String getType();
+
+	public boolean validateOperation(IAccount account, IOperation operation);
 }

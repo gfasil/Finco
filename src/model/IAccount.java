@@ -16,7 +16,9 @@ public interface IAccount extends FincoObservable<IAccount> {
 
 
 
-	public boolean applyOperation(IOperation transaction);
+	//public boolean applyOperation(IOperation transaction);
+
+	boolean applyOperation(IOperation transaction);
 
 	public double getBalance();
 

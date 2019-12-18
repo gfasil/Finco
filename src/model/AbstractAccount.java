@@ -55,25 +55,29 @@ public abstract class AbstractAccount implements IAccount {
 
 	@Override
 	public String toString() {
-		return "accountNumber: " + accNumber + ", currentBalance: " + currentBalance;
+		return "accountNumber: " + accNumber + ", currentBalance: " + currentBalance +", type" + getType();
 	}
 
 	@Override
 	public void addInterest() {
 		setBalance(getBalance() + (getBalance() * this.getInterest()));
 
+		notifyObservers();
 	}
 
 	@Override
 	public boolean applyOperation(IOperation transaction) {
+		String type= getOwner().getType();
 		this.transactions.add(transaction);
 		double newBalance = getBalance() + transaction.getAmount();
-		if (newBalance < 0)
+		if (newBalance < 0 || !owner.validateOperation(this, transaction)) {
+			owner.sendEmail("Transaction denied!");
 			return false;
+		}
+
 		setBalance(newBalance);
 		notifyObservers();
 		return true;
-
 	}
 
 	@Override

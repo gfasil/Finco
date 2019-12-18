@@ -1,5 +1,6 @@
 package controller;
 
+import model.Address;
 import model.IAccount;
 import model.ICustomer;
 import model.IOperation;
@@ -15,6 +16,7 @@ public interface IFincoAbstractFactory {
 			LocalDate birthDate);
 
 	public IAccount createAccount(ICustomer owner);
+	public Address createAddress(String street, String city, String state, String zipcode);
 
 	public IOperation createOperation(String name, double amount);
 }
